@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: stock-flow-api  # Nome do contêiner
+    ports:
+      - "3000:3000"
+    environment:
+      DB_USER: caiomarcio
+      DB_PASSWORD: Caiosantos123@
+      DB_NAME: banco_tcc
+      DB_HOST: host.docker.internal  # Use 'host.docker.internal' para acessar o localhost
+      DB_PORT: 5432
+    volumes:
+      - .:/app
