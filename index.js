@@ -1,15 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { validateLoginRequest } = require('./Middlewares/authMiddleware');
-const { login, register  } = require('./Controllers/authController');
+const routes = require('./routes');
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.json());
+app.use(express.json());
 
-app.post('/login', validateLoginRequest, login);
-app.post('/register', validateLoginRequest, register);
+app.use('/', routes);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

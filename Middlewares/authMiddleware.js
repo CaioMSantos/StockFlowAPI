@@ -1,14 +1,23 @@
-const validateLoginRequest = (req, res, next) => {
-    const { username, password } = req.body;
-  
-    if (!username || !password) {
-      return res.status(400).send({ message: 'Username and password are required' });
+// middleware/authMiddleware.js
+
+const jwt = require('jsonwebtoken');
+
+const verifyToken = (req, res, next) => {
+  const token = req.headers['authorization'];
+
+  if (!token) {
+    return res.status(403).json({ message: 'Token not provided' });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: 'Unauthorized' });
     }
-  
+    req.user = decoded.user;
     next();
-  };
-  
-  module.exports = {
-    validateLoginRequest
-  };
-  
+  });
+};
+
+module.exports = {
+  verifyToken,
+};

@@ -15,7 +15,18 @@ const addUser = async (username, password) => {
   await pool.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, hashedPassword]);
 };
 
+const listAllUsers = async () => {
+  const client = await pool.connect();
+  try {
+    const result = await client.query('SELECT * FROM users');
+    return result.rows;
+  } finally {
+    client.release();
+  }
+};
+
 module.exports = {
   findUserByUsername,
-  addUser
+  addUser,
+  listAllUsers
 };
