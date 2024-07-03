@@ -1,0 +1,25 @@
+{
+  "name": "stockflowapi",
+  "version": "1.0.0",
+  "description": "Api dedicada a uma sistema de Controle de Estoque",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaioMSantos/StockFlowAPI.git"
+  },
+  "author": "Caio Marcio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaioMSantos/StockFlowAPI/issues"
+  },
+  "homepage": "https://github.com/CaioMSantos/StockFlowAPI#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
+  }
+}
