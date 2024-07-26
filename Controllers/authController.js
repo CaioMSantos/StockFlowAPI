@@ -28,18 +28,6 @@ const login = async (req, res) => {
   }
 };
 
-const register = async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    await userModel.addUser(username, password);
-    res.status(201).send({ message: 'User registered successfully' });
-  } catch (err) {
-    console.error('Error registering the user', err);
-    res.status(500).send({ message: 'Internal server error' });
-  }
-};
-
 const generateToken = (user) => {
   return jwt.sign({ user }, process.env.JWT_SECRET, {
     expiresIn: '1h', // Expira em 1 hora
@@ -47,6 +35,5 @@ const generateToken = (user) => {
 };
 
 module.exports = {
-  login,
-  register
+  login
 };
