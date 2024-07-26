@@ -5,6 +5,9 @@ const usersController = require('./Controllers/usersController');
 const suppliersController = require('./Controllers/suppliersController')
 const { verifyToken } = require('./Middlewares/authMiddleware');
 
+// Rota para autenticação de usuário (login)
+router.post('/auth/login', authController.login);
+
 //USUARIOS
 // Rota para listar todos os usuários
 router.get('/users/listAll', verifyToken ,usersController.listAllUsers);
@@ -12,8 +15,6 @@ router.get('/users/listAll', verifyToken ,usersController.listAllUsers);
 router.post('/users/add', verifyToken, usersController.addUser);
 // Rota para atualizar as informações do Usuário
 router.post('/users/update', verifyToken, usersController.updateUser)
-// Rota para autenticação de usuário (login)
-router.post('/users/login', authController.login);
 // Rota para deletar um usuário
 router.delete('/users/delete/:userId', verifyToken, usersController.deleteUser);
 
