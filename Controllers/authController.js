@@ -4,10 +4,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user = await userModel.findUserByUsername(username);
+    const user = await userModel.findUserByEmail(email);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -21,7 +21,7 @@ const login = async (req, res) => {
 
     const token = generateToken({ id: user.id, username: user.username });
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, name: user.name });
   } catch (err) {
     console.error('Error authenticating user', err);
     res.status(500).json({ message: 'Internal server error' });
@@ -30,7 +30,7 @@ const login = async (req, res) => {
 
 const generateToken = (user) => {
   return jwt.sign({ user }, process.env.JWT_SECRET, {
-    expiresIn: '1h', // Expira em 1 hora
+    expiresIn: '24h',
   });
 };
 
