@@ -1,7 +1,17 @@
+require('dotenv').config();
 const { Pool } = require('pg');
-const config = require('../config');
 
-const pool = new Pool(config.db);
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: false,
+  }
+});
+
 
 const addSuppliers = async (name, phone, email, address, city, state, zip_code, country) => {
     const client = await pool.connect();
